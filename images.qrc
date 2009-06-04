@@ -1,0 +1,40 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource prefix="">
+   <file>images/backgrounda.png</file>
+   <file>images/blacka.png</file>
+   <file>images/whitea.png</file>
+   <file>images/wpointa.png</file>
+   <file>images/bpointa.png</file>
+   <file>images/wdpointa.png</file>
+   <file>images/bdpointa.png</file>
+   <file>images/dicea.png</file>
+   <file>images/pottya.png</file>
+
+   <file>images/backgroundg.png</file>
+   <file>images/blackg.png</file>
+   <file>images/whiteg.png</file>
+   <file>images/wpointg.png</file>
+   <file>images/bpointg.png</file>
+   <file>images/wdpointg.png</file>
+   <file>images/bdpointg.png</file>
+   <file>images/diceg.png</file>
+   <file>images/pottyg.png</file>
+
+   <file>images/semmi.png</file>
+   <file>images/d2a.png</file>
+   <file>images/d4a.png</file>
+   <file>images/d8a.png</file>
+   <file>images/d16a.png</file>
+   <file>images/d32a.png</file>
+   <file>images/d64a.png</file>
+
+   <file>images/d2g.png</file>
+   <file>images/d4g.png</file>
+   <file>images/d8g.png</file>
+   <file>images/d16g.png</file>
+   <file>images/d32g.png</file>
+   <file>images/d64g.png</file>
+
+   <file>images/new.png</file>
+</qresource>
+</RCC>
