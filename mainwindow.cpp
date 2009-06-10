@@ -25,7 +25,7 @@ MainWindow::MainWindow() : board(0) {
 /* MENU  */
   menuBar = new QMenuBar(this);
 
-  fileMenu = new QMenu("&File", this);
+  fileMenu = new QMenu("&File", this); {
     newgame = fileMenu->addAction("&New");
     connect(newgame, SIGNAL(triggered()), this, SLOT(newGame()));
 
@@ -37,14 +37,19 @@ MainWindow::MainWindow() : board(0) {
 
     exitAction = fileMenu->addAction("E&xit");
     connect(exitAction, SIGNAL(triggered()), this, SLOT(exit()));
+  }
 
-  optionsMenu = new QMenu("&Options", this);
-    changeStyleAction = optionsMenu->addAction("Gergo Style");
+  optionsMenu = new QMenu("&Options", this); {
+    changeStyleAction = optionsMenu->addAction("funny style");
     connect(changeStyleAction, SIGNAL(triggered()), this, SLOT(changeStyle()));
+    changeStyleAction2 = optionsMenu->addAction("regular style");
+    connect(changeStyleAction2, SIGNAL(triggered()), this, SLOT(changeBackStyle()));
+  }
 
-  helpMenu = new QMenu("&Help", this);
+  helpMenu = new QMenu("&Help", this); {
     aboutAction = helpMenu->addAction(tr("About"));
     connect(aboutAction, SIGNAL(triggered()), this, SLOT(about()));
+  }
 
   menuBar->addMenu(fileMenu);
   menuBar->addMenu(optionsMenu);
@@ -82,12 +87,15 @@ MainWindow::MainWindow() : board(0) {
   addToolBar(toolBar);
 /*TOOL BAR END */
 
+  style = 'a';
+
   setWindowTitle(tr("Backgammon by Napszel"));
    Board * loadBoard;
   if (Board::loadFromFile(MainWindow::autosaveFilename, loadBoard))
     setBoard(loadBoard);
   else
     newGame();
+  board->changeStyle(style);
 
   autosaveTimer = new QTimer(this);
   connect(autosaveTimer, SIGNAL(timeout()), this, SLOT(autoSaveGame()));
@@ -102,6 +110,7 @@ void MainWindow::setBoard(Board * newBoard) {
   board->setParent(this);
   connect(savegamebar, SIGNAL(triggered()), this, SLOT(saveGame()));
   connect(savegame, SIGNAL(triggered()), this, SLOT(saveGame()));
+  board->changeStyle(style);
 }
 
 void MainWindow::newGame() {
@@ -139,12 +148,18 @@ void MainWindow::about() {
 void MainWindow::exit() {
   autoSaveGame();
   QMessageBox::information(this, "FYI",
-	 "The current game have been saved and will be reloded the next time you start this program.");
+	 "The current game has been saved and will be reloded the next time you start this program.");
   close();
 }
 
 void MainWindow::changeStyle() {
   board->changeStyle('g');
+  style = 'g';
+}
+
+void MainWindow::changeBackStyle() {
+  board->changeStyle('a');
+  style = 'a';
 }
 
 void MainWindow::autoSaveGame() {

@@ -39,7 +39,7 @@ Board::Board(QWidget * parent) : QWidget(parent) {
   for (unsigned int i=0, line = 0; i<noOfPoints/2; ++i) {
     if ((i%2)!=0) {
       points[i] = new Point(Point::WHITE,Point::DOWN,this);
-    } else 
+    } else
       points[i] = new Point(Point::BLACK,Point::DOWN,this);
     if (i == noOfPoints*1/4) line = 70;
     points[i]->move(i*points[i]->scalex + line + 100, height/2 + 26);

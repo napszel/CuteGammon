@@ -17,6 +17,7 @@ public:
   static const QString autosaveFilename;
   static const unsigned int width, height;
   MainWindow();
+  char style;
 
 private slots:
   void about();
@@ -25,6 +26,7 @@ private slots:
   void exit();
   void saveGame();
   void changeStyle();
+  void changeBackStyle();
   void autoSaveGame();
 
 private:
@@ -44,6 +46,7 @@ private:
   QAction * savegame;
   QAction * loadgame;
   QAction * changeStyleAction;
+  QAction * changeStyleAction2;
 
   QAction * newgamebar;
   QAction * savegamebar;
