@@ -13,7 +13,6 @@ Point::Point(Color color, Place place, QWidget* parent):
   changeStyle('a');
 
   setAcceptDrops(true);
-  show();
 }
 
 void Point::removeChecker() {
@@ -80,17 +79,28 @@ void Point::addChecker(Checker * checker) {
 
 void Point::dragEnterEvent(QDragEnterEvent * event) {
   if (event->mimeData()->hasFormat("application/x-backgammon-checkerdrop")) {
-    event->acceptProposedAction();
-  } else event->ignore();
+    int thisCheckersColor = ((Checker*) event->source())->getMyColor();
+    if ((getCheckersNo() < 2) || (thisCheckersColor == checkersColor())) {
+      event->acceptProposedAction();
+    } else
+      event->ignore();
+  } else
+    event->ignore();
 }
 
 void Point::dropEvent(QDropEvent * event) {
   if (event->mimeData()->hasFormat("application/x-backgammon-checkerdrop")) {
-    Checker *c = (Checker*) event->source();
-    c->getMyPlace()->removeChecker();
-    addChecker(c);
-    c->show();
-    event->acceptProposedAction();
+    int thisCheckersColor = ((Checker*) event->source())->getMyColor();
+    if ((getCheckersNo() < 2) || (thisCheckersColor == checkersColor())) {
+      event->acceptProposedAction();
+      Checker *thisChecker = (Checker*) event->source();
+      thisChecker->getMyPlace()->removeChecker();
+      if ((getCheckersNo() == 1) && (thisCheckersColor != checkersColor())) {
+	removeChecker();
+      }
+      addChecker(thisChecker);
+    } else
+      event->ignore();
   } else
     event->ignore();
 }
