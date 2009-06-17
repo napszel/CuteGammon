@@ -11,7 +11,6 @@ class ClickableLabel : public QLabel
 public:
   ClickableLabel(QWidget * parent = 0);
   void mousePressEvent(QMouseEvent * event);
-  void setPicture(QString picturefile);
 signals:
   void clicked();
 };

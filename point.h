@@ -25,8 +25,8 @@ public:
   void changeStyle(const char codeletter);
 
 private:
-  Place place;
   Color color;
+  Place place;
   QStack<Checker*> checkers;
 };
 

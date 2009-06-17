@@ -10,12 +10,12 @@ Dice::Dice(int num, Where where, QWidget * parent):
   ClickableLabel(parent),
   number(num)
 {
-  setPicture(":/images/dicea.png");
+  setPixmap(QPixmap(":/images/dicea.png"));
   if (where == TOP) move(435,281);
   else move(435,331);
 
   for (int i=0; i<8; ++i){
-    spots[i] = new Spot(i+1,this);
+    spots[i] = new Spot(i+1, this);
   }
 
   setNumber(number);
@@ -55,7 +55,7 @@ void Dice::roll() const {
 }
 
 void Dice::changeStyle(const char codeletter) {
-  setPicture(QString(":/images/dice") + codeletter + QString(".png"));
+  setPixmap(QString(":/images/dice") + codeletter + QString(".png"));
   for (int i=0; i<8; ++i){
     spots[i]->changeStyle(codeletter);
   }

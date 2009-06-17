@@ -13,42 +13,41 @@
 #include <QTimer>
 
 const QString MainWindow::autosaveFilename(QFSFileEngine::homePath() +
-				      QDir::separator() +
-				      ".autosave.bgm");
+                                      QDir::separator() +
+                                      ".autosave.bgm");
 
 const unsigned int MainWindow::width = 970;
 const unsigned int MainWindow::height = 770;
 
-MainWindow::MainWindow() : board(0) {
+MainWindow::MainWindow() : board(0), style('a') {
   setFixedSize(width, height);
 
-/* MENU  */
-  menuBar = new QMenuBar(this);
+/* MENU + TOOLBAR */
+  QMenuBar *menuBar = new QMenuBar(this);
+  QToolBar *toolBar = new QToolBar(this);
+  toolBar->setMovable(false);
 
-  fileMenu = new QMenu("&File", this); {
-    newgame = fileMenu->addAction("&New");
-    connect(newgame, SIGNAL(triggered()), this, SLOT(newGame()));
+  QMenu *fileMenu = new QMenu("&File", this); {
+    QAction *newGameAction = fileMenu->addAction(QIcon(":/images/new.png"), "&New", this, SLOT(newGame()));
+    toolBar->addAction(newGameAction);
+    toolBar->addSeparator();
 
-    loadgame = fileMenu->addAction("&Open");
-    connect(loadgame, SIGNAL(triggered()), this, SLOT(loadGame()));
+    QAction *loadGameAction = fileMenu->addAction("&Open", this, SLOT(loadGame()));
+    toolBar->addAction(loadGameAction);
 
-    savegame = fileMenu->addAction("&Save");
-    /* connection set in setBoard()*/
+    saveGameAction = fileMenu->addAction("&Save"); /* connection set in setBoard()*/
+    toolBar->addAction(saveGameAction);
 
-    exitAction = fileMenu->addAction("E&xit");
-    connect(exitAction, SIGNAL(triggered()), this, SLOT(exit()));
+    fileMenu->addAction("E&xit", this, SLOT(close()));
   }
 
-  optionsMenu = new QMenu("&Options", this); {
-    changeStyleAction = optionsMenu->addAction("funny style");
-    connect(changeStyleAction, SIGNAL(triggered()), this, SLOT(changeStyle()));
-    changeStyleAction2 = optionsMenu->addAction("regular style");
-    connect(changeStyleAction2, SIGNAL(triggered()), this, SLOT(changeBackStyle()));
+  QMenu *optionsMenu = new QMenu("&Options", this); {
+    optionsMenu->addAction("funny style", this, SLOT(changeStyle()));
+    optionsMenu->addAction("regular style", this, SLOT(changeBackStyle()));
   }
 
-  helpMenu = new QMenu("&Help", this); {
-    aboutAction = helpMenu->addAction(tr("About"));
-    connect(aboutAction, SIGNAL(triggered()), this, SLOT(about()));
+  QMenu *helpMenu = new QMenu("&Help", this); {
+    helpMenu->addAction("About", this, SLOT(about()));
   }
 
   menuBar->addMenu(fileMenu);
@@ -56,38 +55,15 @@ MainWindow::MainWindow() : board(0) {
   menuBar->addMenu(helpMenu);
 
   setMenuBar(menuBar);
+  addToolBar(toolBar);
 /* MENU END */
 
-
 /* STATUS BAR */
-  statusBar = new QStatusBar(this);
+  QStatusBar *statusBar = new QStatusBar(this);
   setStatusBar(statusBar);
   statusBar->setSizeGripEnabled(false);
   statusBar->showMessage("Ready",60000);
 /* STATUS BAR END */
-
-
-/* TOOL BAR */
-  toolBar = new QToolBar(this);
-
-  newgamebar = new QAction(QIcon(":/images/new.png"), "&New", this);
-  toolBar->addAction(newgamebar);
-  connect(newgamebar, SIGNAL(triggered()), this, SLOT(newGame()));
-  toolBar->addSeparator();
-
-  savegamebar = toolBar->addAction("Save");
-  /* connection set in setBoard()*/
-  toolBar->addSeparator();
-
-  loadgamebar = toolBar->addAction("Open");
-  connect(loadgamebar, SIGNAL(triggered()), this, SLOT(loadGame()));
-
-  toolBar->setMovable(false);
-
-  addToolBar(toolBar);
-/*TOOL BAR END */
-
-  style = 'a';
 
   setWindowTitle(tr("Backgammon by Napszel"));
    Board * loadBoard;
@@ -108,8 +84,7 @@ void MainWindow::setBoard(Board * newBoard) {
   setCentralWidget(board);
   board->move(200,200);
   board->setParent(this);
-  connect(savegamebar, SIGNAL(triggered()), this, SLOT(saveGame()));
-  connect(savegame, SIGNAL(triggered()), this, SLOT(saveGame()));
+  connect(saveGameAction, SIGNAL(triggered()), this, SLOT(saveGame()));
   board->changeStyle(style);
 }
 
@@ -119,8 +94,8 @@ void MainWindow::newGame() {
 
 void MainWindow::loadGame() {
   QString fileName = QFileDialog::getOpenFileName(this, "Load game",
-		     QFSFileEngine::homePath()+"/mybackgammongame.bgm",
-		     "Backgammon games (*.bgm);;All files (*)");
+                     QFSFileEngine::homePath()+"/mybackgammongame.bgm",
+                     "Backgammon games (*.bgm);;All files (*)");
   if (!fileName.isEmpty()) {
     Board * loadedBoard = 0;
     if (Board::loadFromFile(fileName, loadedBoard)) {
@@ -132,8 +107,8 @@ void MainWindow::loadGame() {
 
 void MainWindow::saveGame() {
   QString fileName = QFileDialog::getSaveFileName(this, "Save game",
-	QFSFileEngine::homePath()+"/mybackgammongame.bgm",
-	     "Backgammon games (*.bgm);;All files (*)");
+        QFSFileEngine::homePath()+"/mybackgammongame.bgm",
+             "Backgammon games (*.bgm);;All files (*)");
   if (!fileName.isEmpty()) {
     if (!fileName.endsWith(".bgm"))
       fileName += ".bgm";
@@ -143,13 +118,6 @@ void MainWindow::saveGame() {
 
 void MainWindow::about() {
   QMessageBox::information(this, "About", "Made by Szadeczky-Karodoss Eva and Risko Gergely \n2009");
-}
-
-void MainWindow::exit() {
-  autoSaveGame();
-  QMessageBox::information(this, "FYI",
-	 "The current game has been saved and will be reloded the next time you start this program.");
-  close();
 }
 
 void MainWindow::changeStyle() {

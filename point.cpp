@@ -7,14 +7,15 @@ const int Point::scaley = 260;
 
 Point::Point(Color color, Place place, QWidget* parent):
   QLabel(parent),
-  place(place),
-  color(color)
+  color(color),
+  place(place)
 {
   changeStyle('a');
 
   setAcceptDrops(true);
 }
 
+// FIXME: use Q_ASSERT
 void Point::removeChecker() {
   if (!checkers.isEmpty()) {
     checkers.pop();
@@ -37,15 +38,14 @@ Checker* Point::topChecker() {
 }
 
 void Point::clearCheckers() {
-  if (!checkers.isEmpty()) 
-    checkers.clear() ;
+  checkers.clear();
 }
 
 void Point::addChecker(Checker * checker) {
   checkers.push(checker);
   int tmp = getCheckersNo();
 
-  if (getCheckersNo()<6)
+  if (tmp<6)
     if (place == UP)
       checker->move(QPoint(0,tmp*50-50));
     else
@@ -72,8 +72,6 @@ void Point::addChecker(Checker * checker) {
 	  checker->move(QPoint(0,tmp*50-630));
 
   checker->setPoint(this);
-  checker->setParent(this);
-  checker->show();
 }
 
 
@@ -106,20 +104,23 @@ void Point::dropEvent(QDropEvent * event) {
 }
 
 void Point::changeStyle(const char codeletter) {
-  if (color == WHITE) {
-    if (place == DOWN)
-      setPixmap(QPixmap(QString(":/images/wdpoint") + codeletter + QString(".png")).scaled(scalex,scaley));
-    else
-      if (place == UP)
-	setPixmap(QPixmap(QString(":/images/wpoint") + codeletter + QString(".png")).scaled(scalex,scaley));
-      else
-	setPixmap(QPixmap(":/images/semmi.png").scaled(scalex,scaley));
-  }else
-    if (place == DOWN)
-      setPixmap(QPixmap(QString(":/images/bdpoint") + codeletter + QString(".png")).scaled(scalex,scaley));
-    else
-      if (place == UP)
-	setPixmap(QPixmap(QString(":/images/bpoint") + codeletter + QString(".png")).scaled(scalex,scaley));
-      else
-	setPixmap(QPixmap(":/images/semmi.png").scaled(scalex,scaley));
+  if (place == END) {
+    setPixmap(QString(":/images/semmi.png"));
+    return;
+  }
+
+  QString direction;
+  if (place == DOWN)
+    direction = "d";
+  else
+    direction = "";
+
+  QString colorstr;
+  if (color == WHITE)
+    colorstr = "w";
+  else
+    colorstr = "b";
+
+  setPixmap(QPixmap(QString(":/images/") + colorstr + direction + "point" + codeletter + ".png").scaled(scalex, scaley));
 }
+

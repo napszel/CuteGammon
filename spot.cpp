@@ -1,5 +1,3 @@
-#include <QMouseEvent>
-#include <QLabel>
 #include "spot.h"
 
 Spot::Spot(int num, QWidget * parent):
@@ -32,6 +30,5 @@ Spot::Spot(int num, QWidget * parent):
 }
 
 void Spot::changeStyle(const char codeletter) {
-  setPixmap(QPixmap(QString(":/images/potty") + codeletter + QString(".png")));
+  setPixmap(QPixmap(QString(":/images/potty") + codeletter + ".png"));
 }
-

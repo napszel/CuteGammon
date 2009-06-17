@@ -20,15 +20,16 @@
 #include <QFSFileEngine>
 #include <QDir>
 
-
 const unsigned int Board::noOfPoints = 24;
 const unsigned int Board::noOfCheckers = 30;
 const unsigned int Board::width = 900;
 const unsigned int Board::height = 626;
 
-
 Board::Board(QWidget * parent) : QWidget(parent) {
   setFixedSize(width, height);
+
+  // FIXME: call changestyle at startup instead of this and after that
+  // the changestyle at constructors can be deleted from all of the classes
 
   QPalette myPalette = palette();
   myPalette.setBrush(QPalette::Window, QBrush(QPixmap(":/images/backgrounda.png")));
@@ -87,9 +88,9 @@ Board::Board(QWidget * parent) : QWidget(parent) {
 
 void Board::createCheckers() {
   for (unsigned int i=0; i<Board::noOfCheckers; ++i){
-    if (i<=Board::noOfCheckers/2-1) 
+    if (i<=Board::noOfCheckers/2-1)
       checkers[i] = new Checker(Checker::WHITE, this);
-    else 
+    else
       checkers[i] = new Checker(Checker::BLACK, this);
   }
 }
@@ -144,34 +145,34 @@ bool Board::loadFromFile(const QString filename, Board* &retBoard) {
       std::string nextPointstr;
       openedfile >> nextPointstr;
       while ((!openedfile.eof()) && (!error)) {
-	error_at += 1;
-	unsigned int nextPoint;
-	unsigned int nextColor;
-	unsigned int nextCount;
-	std::string nextColorstr;
-	std::string nextCountstr;
+        error_at += 1;
+        unsigned int nextPoint;
+        unsigned int nextColor;
+        unsigned int nextCount;
+        std::string nextColorstr;
+        std::string nextCountstr;
 
-	nextPoint = QString(nextPointstr.c_str()).toInt(&ok);
-	if ((ok) && (nextPoint<=noOfPoints+4)){
+        nextPoint = QString(nextPointstr.c_str()).toInt(&ok);
+        if ((ok) && (nextPoint<=noOfPoints+4)){
 
-	  openedfile >> nextColorstr;
-	  nextColor = QString(nextColorstr.c_str()).toInt(&ok);
-	  if ((ok) && (nextColor<3)){
+          openedfile >> nextColorstr;
+          nextColor = QString(nextColorstr.c_str()).toInt(&ok);
+          if ((ok) && (nextColor<3)){
 
-	    openedfile >> nextCountstr;
-	    nextCount = QString(nextCountstr.c_str()).toInt(&ok);
-	    if ((ok) && (nextCount<noOfCheckers)){
+            openedfile >> nextCountstr;
+            nextCount = QString(nextCountstr.c_str()).toInt(&ok);
+            if ((ok) && (nextCount<noOfCheckers)){
 
-	      for (unsigned int j=0; j < nextCount; j++) {
-		retBoard->checkers[nextChecker] = new Checker(nextColor, retBoard);
-		checker_count+=1;
-		retBoard->points[nextPoint]->addChecker(retBoard->checkers[nextChecker]);
-		++nextChecker;
-	      }
-	    } else error = true;
-	  } else error = true;
-	} else error = true;
-	openedfile >> nextPointstr;
+              for (unsigned int j=0; j < nextCount; j++) {
+                retBoard->checkers[nextChecker] = new Checker(nextColor, retBoard);
+                checker_count+=1;
+                retBoard->points[nextPoint]->addChecker(retBoard->checkers[nextChecker]);
+                ++nextChecker;
+              }
+            } else error = true;
+          } else error = true;
+        } else error = true;
+        openedfile >> nextPointstr;
       }
       openedfile.close();
       //        if (error) {
@@ -201,10 +202,10 @@ void Board::changeStyle(const char codeletter) {
   stylecode = codeletter;
 
   QPalette myPalette = palette();
-  myPalette.setBrush(QPalette::Window, 
-		     QBrush(QPixmap(QString(":/images/background") 
-				    + codeletter 
-				    + QString(".png"))));
+  myPalette.setBrush(QPalette::Window,
+                     QBrush(QPixmap(QString(":/images/background")
+                                    + codeletter
+                                    + QString(".png"))));
   setPalette(myPalette);
   setAutoFillBackground(true);
 

@@ -14,7 +14,7 @@ public:
   void changeStyle(const char codeletter);
 protected:
   unsigned int number;
-  Spot * spots[8];
+  Spot *spots[8];
 public slots:
   void roll() const;
   void setNumber(const int number) const;

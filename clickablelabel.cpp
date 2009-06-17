@@ -7,11 +7,6 @@ ClickableLabel::ClickableLabel(QWidget * parent):
 {
 }
 
-void ClickableLabel::setPicture(QString picturefile)
-{
-  setPixmap(QPixmap(picturefile));
-}
-
 void ClickableLabel::mousePressEvent(QMouseEvent * /*event*/)
 {
   emit clicked();

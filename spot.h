@@ -8,7 +8,7 @@ class Spot : public QLabel
   Q_OBJECT
 
 public:
-  Spot(int num, QWidget * parent = 0);
+  explicit Spot(int num, QWidget * parent = 0);
   void changeStyle(const char codeletter);
 };
 
