@@ -1,4 +1,5 @@
 #include "point.h"
+#include "board.h"
 #include <QDragEnterEvent>
 #include <QDebug>
 
@@ -20,7 +21,8 @@ void Point::removeChecker() {
   if (!checkers.isEmpty()) {
     checkers.pop();
   }
-  else qDebug() << "hiba";
+  else
+    qDebug() << "hiba";
 }
 
 int Point::getCheckersNo() {
@@ -34,7 +36,13 @@ int Point::checkersColor() {
 }
 
 Checker* Point::topChecker() {
-  return checkers.top();
+  if (!checkers.isEmpty()) {
+    return checkers.top();
+  }
+  else {
+    qDebug() << "hiba";
+    return 0;
+  }
 }
 
 void Point::clearCheckers() {
@@ -72,6 +80,7 @@ void Point::addChecker(Checker * checker) {
 	  checker->move(QPoint(0,tmp*50-630));
 
   checker->setPoint(this);
+  checker->show();
 }
 
 
@@ -93,7 +102,8 @@ void Point::dropEvent(QDropEvent * event) {
       event->acceptProposedAction();
       Checker *thisChecker = (Checker*) event->source();
       thisChecker->getMyPlace()->removeChecker();
-      if ((getCheckersNo() == 1) && (thisCheckersColor != checkersColor())) {
+      if ((getCheckersNo() == 1) && (thisCheckersColor != checkersColor())) { //hit
+	emit killedChecker(topChecker());
 	removeChecker();
       }
       addChecker(thisChecker);

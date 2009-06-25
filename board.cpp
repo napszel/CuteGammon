@@ -44,6 +44,7 @@ Board::Board(QWidget * parent) : QWidget(parent) {
       points[i] = new Point(Point::BLACK,Point::DOWN,this);
     if (i == noOfPoints*1/4) line = 70;
     points[i]->move(i*points[i]->scalex + line + 100, height/2 + 26);
+    connect(points[i], SIGNAL(killedChecker(Checker *)), this, SLOT(placeKilledChecker(Checker *)));
   }
 
   for (unsigned int i=noOfPoints/2, j = 0, line = 0; i<noOfPoints; ++i, ++j) {
@@ -52,6 +53,7 @@ Board::Board(QWidget * parent) : QWidget(parent) {
     } else points[i] = new Point(Point::BLACK, Point::UP,this);
     if (i == noOfPoints*3/4) line = 70;
     points[i]->move((j*points[i]->scalex) + line + 100, 57);
+    connect(points[i], SIGNAL(killedChecker(Checker *)), this, SLOT(placeKilledChecker(Checker *)));
   }
 
   /* FINISH PLACE */
@@ -120,6 +122,13 @@ void Board::clearPoints() {
   }
 }
 
+void Board::placeKilledChecker(Checker * checkerHit) {
+  if (checkerHit->getMyColor() == Checker::WHITE)
+    points[25]->addChecker(checkerHit);
+  else
+    points[24]->addChecker(checkerHit);
+}
+
 bool Board::validDoublediceNum(const int num) {
   return (num == 2 || num == 4 || num == 8 || num == 16 || num == 32 || num == 64);
 }
@@ -145,34 +154,34 @@ bool Board::loadFromFile(const QString filename, Board* &retBoard) {
       std::string nextPointstr;
       openedfile >> nextPointstr;
       while ((!openedfile.eof()) && (!error)) {
-        error_at += 1;
-        unsigned int nextPoint;
-        unsigned int nextColor;
-        unsigned int nextCount;
-        std::string nextColorstr;
-        std::string nextCountstr;
+	error_at += 1;
+	unsigned int nextPoint;
+	unsigned int nextColor;
+	unsigned int nextCount;
+	std::string nextColorstr;
+	std::string nextCountstr;
 
-        nextPoint = QString(nextPointstr.c_str()).toInt(&ok);
-        if ((ok) && (nextPoint<=noOfPoints+4)){
+	nextPoint = QString(nextPointstr.c_str()).toInt(&ok);
+	if ((ok) && (nextPoint<=noOfPoints+4)){
 
-          openedfile >> nextColorstr;
-          nextColor = QString(nextColorstr.c_str()).toInt(&ok);
-          if ((ok) && (nextColor<3)){
+	  openedfile >> nextColorstr;
+	  nextColor = QString(nextColorstr.c_str()).toInt(&ok);
+	  if ((ok) && (nextColor<3)){
 
-            openedfile >> nextCountstr;
-            nextCount = QString(nextCountstr.c_str()).toInt(&ok);
-            if ((ok) && (nextCount<noOfCheckers)){
+	    openedfile >> nextCountstr;
+	    nextCount = QString(nextCountstr.c_str()).toInt(&ok);
+	    if ((ok) && (nextCount<noOfCheckers)){
 
-              for (unsigned int j=0; j < nextCount; j++) {
-                retBoard->checkers[nextChecker] = new Checker(nextColor, retBoard);
-                checker_count+=1;
-                retBoard->points[nextPoint]->addChecker(retBoard->checkers[nextChecker]);
-                ++nextChecker;
-              }
-            } else error = true;
-          } else error = true;
-        } else error = true;
-        openedfile >> nextPointstr;
+	      for (unsigned int j=0; j < nextCount; j++) {
+		retBoard->checkers[nextChecker] = new Checker(nextColor, retBoard);
+		checker_count+=1;
+		retBoard->points[nextPoint]->addChecker(retBoard->checkers[nextChecker]);
+		++nextChecker;
+	      }
+	    } else error = true;
+	  } else error = true;
+	} else error = true;
+	openedfile >> nextPointstr;
       }
       openedfile.close();
       //        if (error) {
@@ -203,9 +212,9 @@ void Board::changeStyle(const char codeletter) {
 
   QPalette myPalette = palette();
   myPalette.setBrush(QPalette::Window,
-                     QBrush(QPixmap(QString(":/images/background")
-                                    + codeletter
-                                    + QString(".png"))));
+		     QBrush(QPixmap(QString(":/images/background")
+				    + codeletter
+				    + QString(".png"))));
   setPalette(myPalette);
   setAutoFillBackground(true);
 

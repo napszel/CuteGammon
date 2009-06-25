@@ -33,6 +33,9 @@ public:
 
   void changeStyle(const char codeletter);
 
+public slots:
+  void placeKilledChecker(Checker * checkerHit);
+
 private:
   void resetCheckers();
   void deleteCheckers(unsigned int num);

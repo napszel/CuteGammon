@@ -37,7 +37,7 @@ void Checker::mousePressEvent(QMouseEvent * event) {
   drag->setPixmap(*top_checker->pixmap());
   drag->setHotSpot(event->pos());
 
-  // We are hiding the checker for the time of dragging, because the
+  // I'm hiding the checker for the time of dragging, because the
   // drag has its own pixmap of the checker
   top_checker->hide();
   drag->exec(Qt::MoveAction, Qt::MoveAction);

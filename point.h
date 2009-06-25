@@ -24,6 +24,9 @@ public:
   Checker * topChecker();
   void changeStyle(const char codeletter);
 
+signals:
+  void killedChecker(Checker * checkerHit);
+
 private:
   Color color;
   Place place;
