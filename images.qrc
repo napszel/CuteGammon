@@ -36,5 +36,12 @@
    <file>images/d64g.png</file>
 
    <file>images/new.png</file>
+   <file>images/open.png</file>
+   <file>images/save.png</file>
+   <file>images/undo.png</file>
+   <file>images/ok.png</file>
+   <file>images/funny.png</file>
+   <file>images/exit.png</file>
+   <file>images/about.png</file>
 </qresource>
 </RCC>

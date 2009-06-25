@@ -13,11 +13,11 @@
 #include <QTimer>
 
 const QString MainWindow::autosaveFilename(QFSFileEngine::homePath() +
-                                      QDir::separator() +
-                                      ".autosave.bgm");
+					   QDir::separator() +
+					   ".autosave.bgm");
 
-const unsigned int MainWindow::width = 970;
-const unsigned int MainWindow::height = 770;
+const unsigned int MainWindow::width = 1050;
+const unsigned int MainWindow::height = 715;
 
 MainWindow::MainWindow() : board(0), style('a') {
   setFixedSize(width, height);
@@ -30,24 +30,22 @@ MainWindow::MainWindow() : board(0), style('a') {
   QMenu *fileMenu = new QMenu("&File", this); {
     QAction *newGameAction = fileMenu->addAction(QIcon(":/images/new.png"), "&New", this, SLOT(newGame()));
     toolBar->addAction(newGameAction);
-    toolBar->addSeparator();
 
-    QAction *loadGameAction = fileMenu->addAction("&Open", this, SLOT(loadGame()));
+    QAction *loadGameAction = fileMenu->addAction(QIcon(":/images/open.png"), "&Open", this, SLOT(loadGame()));
     toolBar->addAction(loadGameAction);
 
-    saveGameAction = fileMenu->addAction("&Save"); /* connection set in setBoard()*/
+    saveGameAction = fileMenu->addAction(QIcon(":/images/save.png"), "&Save"); /* connection set in setBoard()*/
     toolBar->addAction(saveGameAction);
 
-    fileMenu->addAction("E&xit", this, SLOT(close()));
+    fileMenu->addAction(QIcon(":/images/exit.png"), "E&xit", this, SLOT(close()));
   }
 
   QMenu *optionsMenu = new QMenu("&Options", this); {
-    optionsMenu->addAction("funny style", this, SLOT(changeStyle()));
-    optionsMenu->addAction("regular style", this, SLOT(changeBackStyle()));
+    optionsMenu->addAction(QIcon(":/images/funny.png"), "change style", this, SLOT(changeStyle()));
   }
 
   QMenu *helpMenu = new QMenu("&Help", this); {
-    helpMenu->addAction("About", this, SLOT(about()));
+    helpMenu->addAction(QIcon(":/images/about.png"), "About", this, SLOT(about()));
   }
 
   menuBar->addMenu(fileMenu);
@@ -64,6 +62,23 @@ MainWindow::MainWindow() : board(0), style('a') {
   statusBar->setSizeGripEnabled(false);
   statusBar->showMessage("Ready",60000);
 /* STATUS BAR END */
+
+/* PLAYER'S NAMES */
+  QLabel * playerOne = new QLabel("Player One", this);
+  playerOne -> move(902,120);
+  playerOne -> setAlignment(Qt::AlignCenter | Qt::AlignCenter);
+
+  //IGY KELL MAJD HÁTTÉRSZÍNT VÁLTOZTATNI
+//   QPalette myPalette = playerOne -> palette();
+//   myPalette.setBrush(QPalette::Window, QColor(141,239,141));
+//   playerOne -> setPalette(myPalette);
+//   playerOne -> setAutoFillBackground(true);
+
+  QLabel * playerTwo = new QLabel("Player Two", this);
+  playerTwo -> move(902,640);
+  playerTwo -> setAlignment(Qt::AlignCenter | Qt::AlignCenter);
+
+/* PLAYER'S NAMES */
 
   setWindowTitle(tr("Backgammon by Napszel"));
    Board * loadBoard;
@@ -94,8 +109,8 @@ void MainWindow::newGame() {
 
 void MainWindow::loadGame() {
   QString fileName = QFileDialog::getOpenFileName(this, "Load game",
-                     QFSFileEngine::homePath()+"/mybackgammongame.bgm",
-                     "Backgammon games (*.bgm);;All files (*)");
+						  QFSFileEngine::homePath()+"/mybackgammongame.bgm",
+						  "Backgammon games (*.bgm);;All files (*)");
   if (!fileName.isEmpty()) {
     Board * loadedBoard = 0;
     if (Board::loadFromFile(fileName, loadedBoard)) {
@@ -107,8 +122,8 @@ void MainWindow::loadGame() {
 
 void MainWindow::saveGame() {
   QString fileName = QFileDialog::getSaveFileName(this, "Save game",
-        QFSFileEngine::homePath()+"/mybackgammongame.bgm",
-             "Backgammon games (*.bgm);;All files (*)");
+						  QFSFileEngine::homePath()+"/mybackgammongame.bgm",
+						  "Backgammon games (*.bgm);;All files (*)");
   if (!fileName.isEmpty()) {
     if (!fileName.endsWith(".bgm"))
       fileName += ".bgm";
@@ -121,13 +136,13 @@ void MainWindow::about() {
 }
 
 void MainWindow::changeStyle() {
-  board->changeStyle('g');
-  style = 'g';
-}
-
-void MainWindow::changeBackStyle() {
-  board->changeStyle('a');
-  style = 'a';
+  if (style == 'g') {
+    board->changeStyle('a');
+    style = 'a';
+  } else {
+    board->changeStyle('g');
+    style = 'g';
+  }
 }
 
 void MainWindow::autoSaveGame() {

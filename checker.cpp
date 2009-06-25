@@ -27,21 +27,23 @@ void Checker::setPoint(Point * myPoint) {
 }
 
 void Checker::mousePressEvent(QMouseEvent * event) {
-  // Ahelyett, hogy a megfogott this-t húznánk, megkeressük a this alatti Point
-  // legfelső checkerjét és azt húzzuk.
-  QLabel * top_checker = myPlace->topChecker();
-  QDrag *drag = new QDrag(top_checker);
-  QMimeData *dropMimeData = new QMimeData;
-  dropMimeData->setData("application/x-backgammon-checkerdrop", QByteArray());
-  drag->setMimeData(dropMimeData);
-  drag->setPixmap(*top_checker->pixmap());
-  drag->setHotSpot(event->pos());
+  if (getMyPlace()->myPlace() != 2) {
+    // Instead of dragging the checker that was actually picked up
+    // we find the top checker on this point and drag that one
+    QLabel * top_checker = myPlace->topChecker();
+    QDrag * drag = new QDrag(top_checker);
+    QMimeData * dropMimeData = new QMimeData;
+    dropMimeData->setData("application/x-backgammon-checkerdrop", QByteArray());
+    drag->setMimeData(dropMimeData);
+    drag->setPixmap(*top_checker->pixmap());
+    drag->setHotSpot(event->pos());
 
-  // I'm hiding the checker for the time of dragging, because the
-  // drag has its own pixmap of the checker
-  top_checker->hide();
-  drag->exec(Qt::MoveAction, Qt::MoveAction);
-  top_checker->show();
+    // I'm hiding the checker for the time of dragging, because the
+    // drag has its own pixmap of the checker
+    top_checker->hide();
+    drag->exec(Qt::MoveAction, Qt::MoveAction);
+    top_checker->show();
+  }
 }
 
 void Checker::changeStyle(const char codeletter) {

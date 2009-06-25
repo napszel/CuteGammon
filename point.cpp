@@ -134,3 +134,7 @@ void Point::changeStyle(const char codeletter) {
   setPixmap(QPixmap(QString(":/images/") + colorstr + direction + "point" + codeletter + ".png").scaled(scalex, scaley));
 }
 
+int Point::myPlace() {
+  return place;
+}
+

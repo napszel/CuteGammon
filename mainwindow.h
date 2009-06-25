@@ -20,7 +20,6 @@ private slots:
   void loadGame();
   void saveGame();
   void changeStyle();
-  void changeBackStyle();
   void autoSaveGame();
 
 private:

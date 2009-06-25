@@ -23,6 +23,7 @@ public:
   int checkersColor();
   Checker * topChecker();
   void changeStyle(const char codeletter);
+  int myPlace();
 
 signals:
   void killedChecker(Checker * checkerHit);
