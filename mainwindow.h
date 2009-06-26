@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include <QTimer>
 #include "board.h"
+#include "clickablelabel.h"
+#include "lineedit.h"
 
 class QAction;
 
@@ -28,9 +30,11 @@ private:
   static const QString autosaveFilename;
   static const unsigned int width, height;
 
-  QAction *saveGameAction;
-  QTimer *autosaveTimer;
-  Board *board;
+  LineEdit * playerOneName;
+  LineEdit * playerTwoName;
+  QAction * saveGameAction;
+  QTimer * autosaveTimer;
+  Board * board;
   char style;
 };
 

@@ -11,6 +11,8 @@
 #include <QString>
 #include <QFileDialog>
 #include <QTimer>
+#include <clickablelabel.h>
+#include "lineedit.h"
 
 const QString MainWindow::autosaveFilename(QFSFileEngine::homePath() +
 					   QDir::separator() +
@@ -64,21 +66,14 @@ MainWindow::MainWindow() : board(0), style('a') {
 /* STATUS BAR END */
 
 /* PLAYER'S NAMES */
-  QLabel * playerOne = new QLabel("Player One", this);
-  playerOne -> move(902,120);
-  playerOne -> setAlignment(Qt::AlignCenter | Qt::AlignCenter);
 
-  //IGY KELL MAJD HÁTTÉRSZÍNT VÁLTOZTATNI
-//   QPalette myPalette = playerOne -> palette();
-//   myPalette.setBrush(QPalette::Window, QColor(141,239,141));
-//   playerOne -> setPalette(myPalette);
-//   playerOne -> setAutoFillBackground(true);
+  playerOneName = new LineEdit("Player one",this);
+  playerOneName -> move(905,120);
 
-  QLabel * playerTwo = new QLabel("Player Two", this);
-  playerTwo -> move(902,640);
-  playerTwo -> setAlignment(Qt::AlignCenter | Qt::AlignCenter);
+  playerTwoName = new LineEdit("Player two",this);
+  playerTwoName -> move(905,640);
 
-/* PLAYER'S NAMES */
+/* PLAYER'S NAMES END */
 
   setWindowTitle(tr("Backgammon by Napszel"));
    Board * loadBoard;

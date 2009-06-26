@@ -2,7 +2,6 @@
 #define CLICKABLELABEL_H
 #include <QObject>
 #include <QLabel>
-#include <QString>
 
 class ClickableLabel : public QLabel
 {
@@ -11,7 +10,9 @@ class ClickableLabel : public QLabel
 public:
   ClickableLabel(QWidget * parent = 0);
   void mousePressEvent(QMouseEvent * event);
+  void mouseDoubleClickEvent(QMouseEvent * event);
 signals:
   void clicked();
+  void doubleClicked(ClickableLabel * what);
 };
 #endif

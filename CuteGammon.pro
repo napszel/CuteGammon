@@ -13,7 +13,8 @@ HEADERS += board.h \
            doubledice.h \
            mainwindow.h \
            point.h \
-           spot.h
+           spot.h \
+           lineedit.h
 SOURCES += board.cpp \
            checker.cpp \
            clickablelabel.cpp \
@@ -23,5 +24,6 @@ SOURCES += board.cpp \
            main.cpp \
            mainwindow.cpp \
            point.cpp \
-           spot.cpp
+           spot.cpp \
+           lineedit.cpp
 RESOURCES += images.qrc
