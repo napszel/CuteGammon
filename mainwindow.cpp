@@ -13,6 +13,11 @@
 #include <QTimer>
 #include <clickablelabel.h>
 #include "lineedit.h"
+#include <sstream>
+#include <istream>
+#include <iostream>
+#include <fstream>
+#include <string>
 
 const QString MainWindow::autosaveFilename(QFSFileEngine::homePath() +
 					   QDir::separator() +
@@ -20,6 +25,9 @@ const QString MainWindow::autosaveFilename(QFSFileEngine::homePath() +
 
 const unsigned int MainWindow::width = 1050;
 const unsigned int MainWindow::height = 715;
+
+const QColor lightGreen = QColor(170,230,170);
+const QColor lightGrey = QColor(170,196,170);
 
 MainWindow::MainWindow() : board(0), style('a') {
   setFixedSize(width, height);
@@ -68,18 +76,27 @@ MainWindow::MainWindow() : board(0), style('a') {
 /* PLAYER'S NAMES */
 
   playerOneName = new LineEdit("Player one",this);
-  playerOneName -> move(905,120);
+  playerOneName -> move(901,120);
+  playerOneName -> changeColor(lightGrey);
 
   playerTwoName = new LineEdit("Player two",this);
-  playerTwoName -> move(905,640);
+  playerTwoName -> move(901,640);
+  playerTwoName -> changeColor(lightGrey);
 
 /* PLAYER'S NAMES END */
 
+/*Message*/
+  message = new QLabel(this);
+  message -> move(905, 385);
+  message -> setText("Click dice for \ninicial roll.");
+  message -> show();
+
   setWindowTitle(tr("Backgammon by Napszel"));
-   Board * loadBoard;
-  if (Board::loadFromFile(MainWindow::autosaveFilename, loadBoard))
+  Board * loadBoard;
+  if (Board::loadFromFile(MainWindow::autosaveFilename, loadBoard)) {
     setBoard(loadBoard);
-  else
+    readMessagesFromFile(autosaveFilename);
+  } else
     newGame();
   board->changeStyle(style);
 
@@ -92,7 +109,6 @@ void MainWindow::setBoard(Board * newBoard) {
   delete board;
   board = newBoard;
   setCentralWidget(board);
-  board->move(200,200);
   board->setParent(this);
   connect(saveGameAction, SIGNAL(triggered()), this, SLOT(saveGame()));
   board->changeStyle(style);
@@ -110,6 +126,7 @@ void MainWindow::loadGame() {
     Board * loadedBoard = 0;
     if (Board::loadFromFile(fileName, loadedBoard)) {
       setBoard(loadedBoard);
+      readMessagesFromFile(fileName);
     }
     else QMessageBox::warning(this, "Bad file", "Can't open this file.");
   }
@@ -123,6 +140,7 @@ void MainWindow::saveGame() {
     if (!fileName.endsWith(".bgm"))
       fileName += ".bgm";
     board->saveToFile(fileName);
+    saveMessagesToFile(fileName);
   }
 };
 
@@ -143,4 +161,23 @@ void MainWindow::changeStyle() {
 void MainWindow::autoSaveGame() {
   qDebug() << "Autosave: " << autosaveFilename;
   board->saveToFile(autosaveFilename);
+  saveMessagesToFile(autosaveFilename);
 }
+
+void MainWindow::saveMessagesToFile(QString filename) {
+  std::ofstream savedfile;
+  savedfile.open(filename.toUtf8().constData(), std::ios::out | std::ios::app);
+  savedfile << (message -> text()).toUtf8().constData();
+  savedfile.close();
+}
+
+void MainWindow::readMessagesFromFile(QString /*filename*/) {
+//   std::ifstream savedfile;
+//   std::string messageline;
+//   savedfile.open(filename.toUtf8().constData());
+//   savedfile.seekg(30);
+//   getline(savedfile, messageline);
+//   message -> setText(messageline.c_str());
+//   savedfile.close();
+}
+

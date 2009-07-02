@@ -10,6 +10,7 @@ class LineEdit : public QLineEdit
 public:
   LineEdit(QString text, QWidget * parent = 0);
   void mouseDoubleClickEvent(QMouseEvent * event);
+  void changeColor(QColor color);
 public slots:
   void changeText();
   void changeTextFinished();

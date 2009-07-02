@@ -4,6 +4,7 @@
 #include "spot.h"
 #include "diceanimation.h"
 #include "doubledice.h"
+#include "mainwindow.h"
 #include <QtGui>
 #include <QString>
 #include <sstream>
@@ -153,7 +154,8 @@ bool Board::loadFromFile(const QString filename, Board* &retBoard) {
       int error_at = 0;
       std::string nextPointstr;
       openedfile >> nextPointstr;
-      while ((!openedfile.eof()) && (!error)) {
+      int i = 1;
+      while ((i <= 28) && (!error)) {
 	error_at += 1;
 	unsigned int nextPoint;
 	unsigned int nextColor;
@@ -182,6 +184,7 @@ bool Board::loadFromFile(const QString filename, Board* &retBoard) {
 	  } else error = true;
 	} else error = true;
 	openedfile >> nextPointstr;
+	i++;
       }
       openedfile.close();
       //        if (error) {

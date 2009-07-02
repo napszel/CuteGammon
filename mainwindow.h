@@ -26,12 +26,15 @@ private slots:
 
 private:
   void setBoard(Board * newBoard);
+  void saveMessagesToFile(QString filename);
+  void readMessagesFromFile(QString filename);
 
   static const QString autosaveFilename;
   static const unsigned int width, height;
 
   LineEdit * playerOneName;
   LineEdit * playerTwoName;
+  QLabel * message;
   QAction * saveGameAction;
   QTimer * autosaveTimer;
   Board * board;
