@@ -1,0 +1,211 @@
+<!DOCTYPE QtCreatorProject>
+<qtcreator>
+ <data>
+  <variable>RunConfiguration0-CommandLineArguments</variable>
+  <valuelist type="QVariantList" />
+ </data>
+ <data>
+  <variable>RunConfiguration0-ProFile</variable>
+  <value type="QString" >CuteGammon.pro</value>
+ </data>
+ <data>
+  <variable>RunConfiguration0-RunConfiguration.name</variable>
+  <value type="QString" >CuteGammon</value>
+ </data>
+ <data>
+  <variable>RunConfiguration0-UseDyldImageSuffix</variable>
+  <value type="bool" >false</value>
+ </data>
+ <data>
+  <variable>RunConfiguration0-UseTerminal</variable>
+  <value type="bool" >false</value>
+ </data>
+ <data>
+  <variable>RunConfiguration0-UserEnvironmentChanges</variable>
+  <valuelist type="QVariantList" />
+ </data>
+ <data>
+  <variable>RunConfiguration0-UserSetName</variable>
+  <value type="bool" >false</value>
+ </data>
+ <data>
+  <variable>RunConfiguration0-type</variable>
+  <value type="QString" >Qt4ProjectManager.Qt4RunConfiguration</value>
+ </data>
+ <data>
+  <variable>activeRunConfiguration</variable>
+  <value type="int" >0</value>
+ </data>
+ <data>
+  <variable>activebuildconfiguration</variable>
+  <value type="QString" >Debug</value>
+ </data>
+ <data>
+  <variable>buildConfiguration-Debug</variable>
+  <valuemap type="QVariantMap" >
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Debug</value>
+   <value key="QtVersionId" type="int" >0</value>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildConfiguration-Release</variable>
+  <valuemap type="QVariantMap" >
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Release</value>
+   <value key="QtVersionId" type="int" >0</value>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildconfiguration-Debug-buildstep0</variable>
+  <valuemap type="QVariantMap" >
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Debug</value>
+   <valuelist key="abstractProcess.Environment" type="QVariantList" >
+    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-9fQ67VICeO,guid=7ac6a9494c800feeee5cbbbe4b8ae555</value>
+    <value type="QString" >DESKTOP_SESSION=default</value>
+    <value type="QString" >DESKTOP_STARTUP_ID=</value>
+    <value type="QString" >DISPLAY=:0.0</value>
+    <value type="QString" >GDMSESSION=default</value>
+    <value type="QString" >GDM_XSERVER_LOCATION=local</value>
+    <value type="QString" >HOME=/home/napszel</value>
+    <value type="QString" >LANG=en_US.UTF-8</value>
+    <value type="QString" >LANGUAGE=</value>
+    <value type="QString" >LD_LIBRARY_PATH=/usr/lib/qtcreator:</value>
+    <value type="QString" >LOGNAME=napszel</value>
+    <value type="QString" >PATH=/usr/bin:/usr/local/bin:/usr/bin:/bin:/usr/games</value>
+    <value type="QString" >PWD=/home/napszel</value>
+    <value type="QString" >QTDIR=/usr</value>
+    <value type="QString" >SESSION_MANAGER=local/moon:@/tmp/.ICE-unix/2107,unix/moon:/tmp/.ICE-unix/2107</value>
+    <value type="QString" >SHELL=/bin/bash</value>
+    <value type="QString" >SSH_AGENT_PID=2157</value>
+    <value type="QString" >SSH_AUTH_SOCK=/tmp/ssh-aNJcYw2107/agent.2107</value>
+    <value type="QString" >USER=napszel</value>
+    <value type="QString" >USERNAME=napszel</value>
+    <value type="QString" >WINDOWPATH=7</value>
+    <value type="QString" >XAUTHORITY=/home/napszel/.Xauthority</value>
+    <value type="QString" >XDG_DATA_DIRS=/usr/local/share/:/usr/share/:/usr/share/gdm/</value>
+    <value type="QString" >XDG_SESSION_COOKIE=c047d16759592d796246ae504b0c3d91-1267393875.830349-1445314625</value>
+   </valuelist>
+   <valuelist key="abstractProcess.arguments" type="QVariantList" >
+    <value type="QString" >/home/napszel/CuteGammon/CuteGammon.pro</value>
+    <value type="QString" >-spec</value>
+    <value type="QString" >/usr/share/qt4/mkspecs/linux-g++</value>
+    <value type="QString" >-r</value>
+    <value type="QString" >CONFIG+=debug</value>
+   </valuelist>
+   <value key="abstractProcess.command" type="QString" >/usr/bin/qmake-qt4</value>
+   <value key="abstractProcess.enabled" type="bool" >false</value>
+   <value key="abstractProcess.workingDirectory" type="QString" >/home/napszel/CuteGammon</value>
+   <value key="buildConfiguration" type="int" >2</value>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildconfiguration-Debug-buildstep1</variable>
+  <valuemap type="QVariantMap" >
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Debug</value>
+   <valuelist key="abstractProcess.Environment" type="QVariantList" >
+    <value type="QString" >DBUS_SESSION_BUS_ADDRESS=unix:abstract=/tmp/dbus-9fQ67VICeO,guid=7ac6a9494c800feeee5cbbbe4b8ae555</value>
+    <value type="QString" >DESKTOP_SESSION=default</value>
+    <value type="QString" >DESKTOP_STARTUP_ID=</value>
+    <value type="QString" >DISPLAY=:0.0</value>
+    <value type="QString" >GDMSESSION=default</value>
+    <value type="QString" >GDM_XSERVER_LOCATION=local</value>
+    <value type="QString" >HOME=/home/napszel</value>
+    <value type="QString" >LANG=en_US.UTF-8</value>
+    <value type="QString" >LANGUAGE=</value>
+    <value type="QString" >LD_LIBRARY_PATH=/usr/lib/qtcreator:</value>
+    <value type="QString" >LOGNAME=napszel</value>
+    <value type="QString" >PATH=/usr/bin:/usr/local/bin:/usr/bin:/bin:/usr/games</value>
+    <value type="QString" >PWD=/home/napszel</value>
+    <value type="QString" >QTDIR=/usr</value>
+    <value type="QString" >SESSION_MANAGER=local/moon:@/tmp/.ICE-unix/2107,unix/moon:/tmp/.ICE-unix/2107</value>
+    <value type="QString" >SHELL=/bin/bash</value>
+    <value type="QString" >SSH_AGENT_PID=2157</value>
+    <value type="QString" >SSH_AUTH_SOCK=/tmp/ssh-aNJcYw2107/agent.2107</value>
+    <value type="QString" >USER=napszel</value>
+    <value type="QString" >USERNAME=napszel</value>
+    <value type="QString" >WINDOWPATH=7</value>
+    <value type="QString" >XAUTHORITY=/home/napszel/.Xauthority</value>
+    <value type="QString" >XDG_DATA_DIRS=/usr/local/share/:/usr/share/:/usr/share/gdm/</value>
+    <value type="QString" >XDG_SESSION_COOKIE=c047d16759592d796246ae504b0c3d91-1267393875.830349-1445314625</value>
+   </valuelist>
+   <valuelist key="abstractProcess.arguments" type="QVariantList" >
+    <value type="QString" >-w</value>
+   </valuelist>
+   <value key="abstractProcess.command" type="QString" >/usr/bin/make</value>
+   <value key="abstractProcess.enabled" type="bool" >true</value>
+   <value key="abstractProcess.workingDirectory" type="QString" >/home/napszel/CuteGammon</value>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildconfiguration-Debug-cleanstep0</variable>
+  <valuemap type="QVariantMap" >
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Debug</value>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildconfiguration-Release-buildstep0</variable>
+  <valuemap type="QVariantMap" >
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Release</value>
+   <value key="buildConfiguration" type="int" >0</value>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildconfiguration-Release-buildstep1</variable>
+  <valuemap type="QVariantMap" >
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Release</value>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildconfiguration-Release-cleanstep0</variable>
+  <valuemap type="QVariantMap" >
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" >Release</value>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildconfigurations</variable>
+  <valuelist type="QVariantList" >
+   <value type="QString" >Debug</value>
+   <value type="QString" >Release</value>
+  </valuelist>
+ </data>
+ <data>
+  <variable>buildstep0</variable>
+  <valuemap type="QVariantMap" >
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" ></value>
+   <value key="mkspec" type="QString" ></value>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildstep1</variable>
+  <valuemap type="QVariantMap" >
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" ></value>
+  </valuemap>
+ </data>
+ <data>
+  <variable>buildsteps</variable>
+  <valuelist type="QVariantList" >
+   <value type="QString" >trolltech.qt4projectmanager.qmake</value>
+   <value type="QString" >trolltech.qt4projectmanager.make</value>
+  </valuelist>
+ </data>
+ <data>
+  <variable>cleanstep0</variable>
+  <valuemap type="QVariantMap" >
+   <value key="ProjectExplorer.BuildConfiguration.DisplayName" type="QString" ></value>
+   <value key="clean" type="bool" >true</value>
+  </valuemap>
+ </data>
+ <data>
+  <variable>cleansteps</variable>
+  <valuelist type="QVariantList" >
+   <value type="QString" >trolltech.qt4projectmanager.make</value>
+  </valuelist>
+ </data>
+ <data>
+  <variable>defaultFileEncoding</variable>
+  <value type="QByteArray" >UTF-8</value>
+ </data>
+ <data>
+  <variable>project</variable>
+  <valuemap type="QVariantMap" />
+ </data>
+</qtcreator>
