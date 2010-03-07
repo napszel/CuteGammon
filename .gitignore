@@ -1,0 +1,5 @@
+/moc_*
+/*.o
+/qrc_*
+/CuteGammon
+/Makefile
