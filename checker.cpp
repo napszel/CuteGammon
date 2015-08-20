@@ -4,6 +4,8 @@
 #include <QMouseEvent>
 #include <QDataStream>
 #include <QByteArray>
+#include <QDrag>
+#include <QMimeData>
 
 Checker::Checker(int player, QWidget * parent):
   QLabel(parent),

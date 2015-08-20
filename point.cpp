@@ -2,6 +2,7 @@
 #include "board.h"
 #include <QDragEnterEvent>
 #include <QDebug>
+#include <QMimeData>
 
 const int Point::scalex = 53;
 const int Point::scaley = 260;

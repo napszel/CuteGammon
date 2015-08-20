@@ -11,6 +11,8 @@
 #include <QString>
 #include <QFileDialog>
 #include <QTimer>
+#include <QMessageBox>
+#include <QMenuBar>
 #include <clickablelabel.h>
 #include "lineedit.h"
 #include <sstream>
@@ -19,9 +21,7 @@
 #include <fstream>
 #include <string>
 
-const QString MainWindow::autosaveFilename(QFSFileEngine::homePath() +
-					   QDir::separator() +
-					   ".autosave.bgm");
+const QString MainWindow::autosaveFilename("/Users/napszel/.autosave.bgm");
 
 const unsigned int MainWindow::width = 1050;
 const unsigned int MainWindow::height = 715;
@@ -120,7 +120,7 @@ void MainWindow::newGame() {
 
 void MainWindow::loadGame() {
   QString fileName = QFileDialog::getOpenFileName(this, "Load game",
-						  QFSFileEngine::homePath()+"/mybackgammongame.bgm",
+						  "/Users/napszel/mybackgammongame.bgm",
 						  "Backgammon games (*.bgm);;All files (*)");
   if (!fileName.isEmpty()) {
     Board * loadedBoard = 0;
@@ -134,7 +134,7 @@ void MainWindow::loadGame() {
 
 void MainWindow::saveGame() {
   QString fileName = QFileDialog::getSaveFileName(this, "Save game",
-						  QFSFileEngine::homePath()+"/mybackgammongame.bgm",
+						  "/Users/napszel/mybackgammongame.bgm",
 						  "Backgammon games (*.bgm);;All files (*)");
   if (!fileName.isEmpty()) {
     if (!fileName.endsWith(".bgm"))

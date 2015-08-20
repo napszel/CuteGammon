@@ -18,7 +18,6 @@
 #include <QColor>
 #include <QDebug>
 #include <QFileDialog>
-#include <QFSFileEngine>
 #include <QDir>
 
 const unsigned int Board::noOfPoints = 24;

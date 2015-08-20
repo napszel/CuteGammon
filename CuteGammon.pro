@@ -3,6 +3,7 @@
 # -------------------------------------------------
 TARGET = CuteGammon
 TEMPLATE = app
+QT += core gui widgets
 SOURCES += main.cpp \
     mainwindow.cpp \
     spot.cpp \
