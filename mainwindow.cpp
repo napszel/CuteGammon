@@ -23,11 +23,11 @@
 
 const QString MainWindow::autosaveFilename("/Users/napszel/.autosave.bgm");
 
-const unsigned int MainWindow::width = 1050;
-const unsigned int MainWindow::height = 715;
+const unsigned int MainWindow::width = 1070;
+const unsigned int MainWindow::height = 633;
 
-const QColor lightGreen = QColor(170,230,170);
-const QColor lightGrey = QColor(170,196,170);
+const QColor lightGreen = QColor(150, 219, 227);
+const QColor lightGrey = QColor(170, 196, 170);
 
 MainWindow::MainWindow() : board(0), style('a') {
   setFixedSize(width, height);
@@ -74,21 +74,19 @@ MainWindow::MainWindow() : board(0), style('a') {
 /* STATUS BAR END */
 
 /* PLAYER'S NAMES */
+  playerOneName = new LineEdit(" Player one",this);
+  playerOneName -> move(Board::width, 44);
+  playerOneName -> changeColor(lightGreen);
 
-  playerOneName = new LineEdit("Player one",this);
-  playerOneName -> move(901,120);
-  playerOneName -> changeColor(lightGrey);
-
-  playerTwoName = new LineEdit("Player two",this);
-  playerTwoName -> move(901,640);
-  playerTwoName -> changeColor(lightGrey);
-
+  playerTwoName = new LineEdit(" Player two",this);
+  playerTwoName -> move(Board::width, Board::height + 23);
+  playerTwoName -> changeColor(lightGreen);
 /* PLAYER'S NAMES END */
 
 /*Message*/
   message = new QLabel(this);
-  message -> move(905, 385);
-  message -> setText("Click dice for \ninicial roll.");
+  message -> move(Board::width, Board::height/2 + 23);
+  message -> setText(" Click dice for \n initial roll.");
   message -> show();
 
   setWindowTitle(tr("Backgammon by Napszel"));
@@ -145,7 +143,7 @@ void MainWindow::saveGame() {
 };
 
 void MainWindow::about() {
-  QMessageBox::information(this, "About", "Made by Szadeczky-Karodoss Eva with help from Risko Gergely \n2009");
+  QMessageBox::information(this, "About", "Made by Eva Szadeczky-Karodoss with help from Gergely Risko\n2009");
 }
 
 void MainWindow::changeStyle() {

@@ -3,3 +3,7 @@
 /qrc_*
 /CuteGammon
 /Makefile
+.DS_Store
+Info.plist
+debug/
+images/PsdFiles

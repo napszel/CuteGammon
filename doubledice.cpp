@@ -7,8 +7,8 @@ DoubleDice::DoubleDice(QWidget * parent):
   ClickableLabel(parent)
 {
   changeStyle('a');
-  number = 64;
-  move(435, 220);
+  number = 4;
+  move(453, 220);
   connect(this, SIGNAL(clicked()), this, SLOT(numberDouble()));
 }
 

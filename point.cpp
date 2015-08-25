@@ -52,33 +52,39 @@ void Point::clearCheckers() {
 
 void Point::addChecker(Checker * checker) {
   checkers.push(checker);
-  int tmp = getCheckersNo();
+  int nth = getCheckersNo();
+  int checkersHeight = 50;
+  int pointsHeight = scaley;
 
-  if (tmp<6)
+  // if 1st-5th
+  if (nth<6)
     if (place == UP)
-      checker->move(QPoint(0,tmp*50-50));
+      checker->move(QPoint(0,(nth*checkersHeight)-checkersHeight));
     else
-      checker->move(-QPoint(0,tmp*50-260));
+      checker->move(-QPoint(0,nth*checkersHeight-pointsHeight));
   else
-    if ((tmp>=6) && (tmp<10))
+    // if 6th-9th
+    if ((nth>=6) && (nth<10))
       if (place == UP)
-	checker->move(QPoint(0,tmp*50-280));
+        checker->move(QPoint(0,nth*checkersHeight-pointsHeight-15));
       else
-	checker->move(-QPoint(0,tmp*50-490));
+        checker->move(-QPoint(0,nth*checkersHeight-490));
     else
-      if ((tmp>=10) && (tmp<13))
-	if (place == UP)
-	  checker->move(QPoint(0,tmp*50-460));
-	else
-	  checker->move(-QPoint(0,tmp*50-670));
+    // if 10th-12th
+    if ((nth>=10) && (nth<13))
+      if (place == UP)
+        checker->move(QPoint(0,nth*checkersHeight-455));
       else
-	if ((tmp>=13) && (tmp<15))
+        checker->move(-QPoint(0,nth*checkersHeight-670));
+      else
+    // if 12th-14th
+    if ((nth>=13) && (nth<15))
 	  if (place == UP)
-	    checker->move(QPoint(0,tmp*50-580));
+        checker->move(QPoint(0,nth*checkersHeight-580));
 	  else
-	    checker->move(-QPoint(0,tmp*50-795));
-	else
-	  checker->move(QPoint(0,tmp*50-630));
+        checker->move(-QPoint(0,nth*checkersHeight-795));
+    else
+      checker->move(QPoint(0,nth*checkersHeight-655));
 
   checker->setPoint(this);
   checker->show();
@@ -116,7 +122,7 @@ void Point::dropEvent(QDropEvent * event) {
 
 void Point::changeStyle(const char codeletter) {
   if (place == END) {
-    setPixmap(QString(":/images/semmi.png"));
+    setPixmap(QPixmap(QString(":/images/semmi.png")).scaled(scalex, scaley));
     return;
   }
 

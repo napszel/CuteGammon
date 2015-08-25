@@ -11,8 +11,8 @@ Dice::Dice(int num, Where where, QWidget * parent):
   number(num)
 {
   setPixmap(QPixmap(":/images/dicea.png"));
-  if (where == TOP) move(435,281);
-  else move(435,331);
+  if (where == TOP) move(453,281);
+  else move(453,331);
 
   for (int i=0; i<8; ++i){
     spots[i] = new Spot(i+1, this);

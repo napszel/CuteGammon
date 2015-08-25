@@ -23,8 +23,8 @@
 const unsigned int Board::noOfPoints = 24;
 const unsigned int Board::noOfFinishPlaces = 4;
 const unsigned int Board::noOfCheckers = 30;
-const unsigned int Board::width = 900;
-const unsigned int Board::height = 626;
+const unsigned int Board::width = 934;
+const unsigned int Board::height = 568;
 
 Board::Board(QWidget * parent) : QWidget(parent) {
   setFixedSize(width, height);
@@ -38,34 +38,37 @@ Board::Board(QWidget * parent) : QWidget(parent) {
   setAutoFillBackground(true);
 
 /* POINTS */
+  double loosen = 1.06;
+  // at the bottom
   for (unsigned int i=0, line = 0; i<noOfPoints/2; ++i) {
     if ((i%2)!=0) {
-      points[i] = new Point(Point::WHITE,Point::DOWN,this);
+      points[i] = new Point(Point::WHITE,Point::DOWN, this);
     } else
-      points[i] = new Point(Point::BLACK,Point::DOWN,this);
-    if (i == noOfPoints*1/4) line = 70;
-    points[i]->move(i*points[i]->scalex + line + 100, height/2 + 26);
+      points[i] = new Point(Point::BLACK,Point::DOWN, this);
+    if (i == noOfPoints*1/4) line = 50;
+    points[i]->move(loosen*i*points[i]->scalex + line + 110, height/2 + 10);
     connect(points[i], SIGNAL(killedChecker(Checker *)), this, SLOT(placeKilledChecker(Checker *)));
   }
 
+  // on top
   for (unsigned int i=noOfPoints/2, j = 0, line = 0; i<noOfPoints; ++i, ++j) {
     if ((i%2)==0) {
-      points[i] = new Point(Point::WHITE, Point::UP,this);
-    } else points[i] = new Point(Point::BLACK, Point::UP,this);
-    if (i == noOfPoints*3/4) line = 70;
-    points[i]->move((j*points[i]->scalex) + line + 100, 57);
+      points[i] = new Point(Point::WHITE, Point::UP, this);
+    } else points[i] = new Point(Point::BLACK, Point::UP, this);
+    if (i == noOfPoints*3/4) line = 50;
+    points[i]->move(loosen*j*points[i]->scalex + line + 110, 15);
     connect(points[i], SIGNAL(killedChecker(Checker *)), this, SLOT(placeKilledChecker(Checker *)));
   }
 
   /* FINISH PLACE */
-  points[24] = new Point(Point::BLACK, Point::END,this);
-  points[24]->move(5, 54);
-  points[25] = new Point(Point::WHITE, Point::END,this);
-  points[25]->move(5, 335);
-  points[26] = new Point(Point::WHITE, Point::END,this);
-  points[26]->move(845, 54);
-  points[27] = new Point(Point::BLACK, Point::END,this);
-  points[27]->move(845, 335);
+  points[24] = new Point(Point::BLACK, Point::END, this);
+  points[24]->move(19, 11);
+  points[25] = new Point(Point::WHITE, Point::END, this);
+  points[25]->move(19, 294);
+  points[26] = new Point(Point::WHITE, Point::END, this);
+  points[26]->move(860, 15);
+  points[27] = new Point(Point::BLACK, Point::END, this);
+  points[27]->move(860, 294);
   /* FINISH PLACE END*/
 /* POINTS END */
 
@@ -79,7 +82,7 @@ Board::Board(QWidget * parent) : QWidget(parent) {
   diceanimation->addDice(dice2);
 
   doubledice = new DoubleDice(this);
-  doubledice->setNumber(64);
+  doubledice->setNumber(2);
 /* DICE */
 
   resetCheckers();
